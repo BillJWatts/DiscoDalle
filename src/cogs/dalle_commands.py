@@ -3,7 +3,7 @@
 
 from discord.ext import commands
 from openai.error import OpenAIError
-
+import logging
 import messenger
 from dd_errors import InvalidReqeustError, NaughtyRequestError, NoTokensError
 from openai_service import generate_image
@@ -11,14 +11,16 @@ from resources import get_confirmation_message
 
 
 class DalleCommands(commands.Cog):
-    """Info commands. Allows the user to query or list all radio station data."""
+    """DiscoDalle commands"""
 
     def __init__(self, client) -> None:
         self.client = client
 
     @commands.command()
     async def generate(self, context: commands.Context, *args: str):
-        """Lists all music genres available through grand theft radio
+        """Take in a user prompt, calls OpenAI to generate an image from the prompt
+
+            example: dd.generate a photorealisit drawing of a cat
 
         Args:
             context (commands.Context): Context of the user command
@@ -43,7 +45,7 @@ class DalleCommands(commands.Cog):
                 channel=context, message="Sorry all my credits are used up."
             )
 
-        except OpenAIError:
+        except (InvalidReqeustError, OpenAIError):
             await messenger.send_message(channel=context, message="Oops, something went wrong.")
 
 

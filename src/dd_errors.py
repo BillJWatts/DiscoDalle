@@ -6,5 +6,5 @@ class NoTokensError(Exception):
     pass
 
 
-class InvalidReqeustError(Exception):
+class InvalidRequestError(Exception):
     pass

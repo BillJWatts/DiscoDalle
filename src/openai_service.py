@@ -59,7 +59,7 @@ def _openai_image_generation_post(prompt: str) -> str:
         else:
             raise InvalidReqeustError()
 
-    except openai_errors.RateLimitError as error:
+    except openai_errors.RateLimitError:
         raise NoTokensError()
 
 
