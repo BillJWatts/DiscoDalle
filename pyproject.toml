@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "DisDalle"
+version = "0.1.0"
+description = ""
+authors = ["William Watts <billjwatts@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+nest-asyncio = "^1.5.6"
+openai = "^0.25.0"
+"discord.py" = "^2.0.1"
+Random-Word = "^1.0.11"
+
+
+[tool.poetry.group.dev.dependencies]
+black = {version = "^22.10.0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
