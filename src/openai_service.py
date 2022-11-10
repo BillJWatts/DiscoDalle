@@ -8,7 +8,7 @@ import openai
 from openai import error as openai_errors
 from random_word import RandomWords
 
-from dd_errors import InvalidReqeustError, NaughtyRequestError, NoTokensError
+from dd_errors import InvalidRequestError, NaughtyRequestError, NoTokensError
 
 openai.api_key = os.getenv("OPENAI_API_TOKEN")
 RW = RandomWords()
@@ -41,7 +41,7 @@ def _openai_image_generation_post(prompt: str) -> str:
 
     Raises:
         NaughtyRequestError: If prompt is rejected by OpenAI safety system
-        InvalidReqeustError: If request is invalid
+        InvalidRequestError: If request is invalid
         NoTokensError: If the OpenAI account has run out of generation tokens
 
     Returns:
@@ -57,7 +57,7 @@ def _openai_image_generation_post(prompt: str) -> str:
         if "safety system" in error._message:
             raise NaughtyRequestError()
         else:
-            raise InvalidReqeustError()
+            raise InvalidRequestError()
 
     except openai_errors.RateLimitError:
         raise NoTokensError()

@@ -5,7 +5,7 @@ from discord.ext import commands
 from openai.error import OpenAIError
 import logging
 import messenger
-from dd_errors import InvalidReqeustError, NaughtyRequestError, NoTokensError
+from dd_errors import InvalidRequestError, NaughtyRequestError, NoTokensError
 from openai_service import generate_image
 from resources import get_confirmation_message
 
@@ -45,7 +45,8 @@ class DalleCommands(commands.Cog):
                 channel=context, message="Sorry all my credits are used up."
             )
 
-        except (InvalidReqeustError, OpenAIError):
+        except (InvalidRequestError, OpenAIError) as error:
+            logging.error(error._message)
             await messenger.send_message(channel=context, message="Oops, something went wrong.")
 
 
